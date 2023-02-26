@@ -6,8 +6,8 @@
 - install Docker and Docker-compose 
 
 Follow the instructions from the link below;
-	https://docs.docker.com/engine/install/
-	https://docs.docker.com/compose/
+	-https://docs.docker.com/engine/install/
+	-https://docs.docker.com/compose/
 
 
 
