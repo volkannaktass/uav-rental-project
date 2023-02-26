@@ -1,0 +1,57 @@
+{% extends "layout.html" %}
+
+{% block body %}
+<h3>UAV Registration Page</h3>
+<hr>
+<p>
+    Welcome, <small>{{request.user.username}}</small>
+</p>
+<hr>
+<a class = "btn btn-danger" href = "{% url 'uav:register-uav' %}"> ADD </a>
+<hr>
+{% if uav_posts %}
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Title</th>
+      <th scope="col">Author</th>
+      <th scope="col">Brand</th>
+      <th scope="col">Model</th>
+      <th scope="col">Weight</th>
+      <th scope="col">Category</th>
+      <th scope="col">Price</th>
+      <th scope="col">Content</th>
+      <th scope="col">Date</th>
+      <th scope="col">Update</th>
+      <th scope="col">Delete</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for uav in uav_posts %}
+    <tr>
+      <td>{{uav.title}}</td>
+      <td>{{uav.author.username}}</td>
+      <td>{{uav.brand}}</td>
+      <td>{{uav.model}}</td>
+      <td>{{uav.weight}}</td>
+      <td>{{uav.category}}</td>
+      <td>{{uav.price}}</td>
+      <td>{{uav.content}}</td>
+      <td>{{uav.created_date}}</td>
+      <td><a href="{% url 'uav:update' uav.id %}" class = "btn btn-danger">Update</a></td>
+      <td><a href="{% url 'uav:delete' uav.id %}" class = "btn btn-danger">Delete</a></td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% else %}
+<div class = "alert alert-danger">
+    You Don't Have Any Uav Post...
+</div>
+{% endif %}
+
+
+
+{% endblock body %}
+
+
