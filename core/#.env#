@@ -1,4 +1,0 @@
-DB_HOST='127.0.0.1'
-DB_USER='volkan'
-DB_PASSWORD='test1234'
-DB_NAME='uavrental'

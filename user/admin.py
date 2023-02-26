@@ -4,7 +4,7 @@ from .models import UserProfile
 
 
 
-
+### Register the model to show in the admin panel
 class UserProfileAdmin(admin.ModelAdmin):
     list_display = ["user","phone_number","gender"]
     list_display_links = ["user","phone_number","gender"]

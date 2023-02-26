@@ -83,8 +83,7 @@ WSGI_APPLICATION = 'core.wsgi.application'
 
 
 # Database
-
-
+# Change the info from .env file or docker-compose file
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
@@ -131,22 +130,26 @@ USE_TZ = True
 
 
 # Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/4.1/howto/static-files/
-
 STATIC_URL = 'static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
 ]
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 
-CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 
+### for more beautiful forms
+### it works with bootstrap5
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 CRISPY_TEMPLATE_PACK = "bootstrap5"
 
-
+### When upload the image,All images will collect under the media directory
+### MEDIA DIRECTORY SELECTION
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
+
+
+#For RichText
 CKEDITOR_CONFIGS = {
     "default": {
         "removePlugins": "stylesheetparser",
@@ -164,5 +167,14 @@ CKEDITOR_CONFIGS = {
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-### TASKS...
-### EMAIL FORGOT PASS...
+
+
+### Google SMTP
+### HOST USER and PASSWORD come from .env files
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+EMAIL_HOST_USER = str(os.getenv('EMAIL_USER'))
+EMAIL_HOST_PASSWORD = str(os.getenv('EMAIL_PASSWORD'))

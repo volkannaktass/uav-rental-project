@@ -2,11 +2,14 @@ from django.db import models
 from ckeditor.fields import RichTextField
 from django.contrib.auth.models import User
 from user.models import UserProfile
-from django.core.validators import MaxValueValidator
 from .utils import user_listing_path
 from .const import BRANDS, MODELS, CATEGORY
 
 
+
+### Created models to make table and field about the uav
+
+### brand model and category get the value from the const.py file
 class Uav(models.Model):
     author = models.ForeignKey("auth.User",on_delete = models.CASCADE)
     title = models.CharField(max_length = 50)

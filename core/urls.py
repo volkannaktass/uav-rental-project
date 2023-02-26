@@ -18,16 +18,25 @@ from django.urls import path,include
 from django.conf import settings
 from django.conf.urls.static import static
 from core import views
-
+from user.views import ResetPasswordView
+from django.contrib.auth import views as auth_views
 
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',views.index,name = "index"),
+    ### implement the other app's routes in this here
     path('uav/',include("uav.urls")),
     path('user/',include("user.urls")),
+    path('password-reset/', ResetPasswordView.as_view(), name='password_reset'),
+    path('password-reset-confirm/<uidb64>/<token>/',
+         auth_views.PasswordResetConfirmView.as_view(template_name='password_reset_confirm.html'),
+         name='password_reset_confirm'),
+    path('password-reset-complete/',
+         auth_views.PasswordResetCompleteView.as_view(template_name='password_reset_complete.html'),
+         name='password_reset_complete'),
 ]
 
-
+### Set the media route
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -3,7 +3,8 @@ from django.db import models
 from django.db.models.signals import post_save
 
 
-
+### It connects with User model and provide us new fields to use
+### And write this model to the db
 class UserProfile(models.Model):
     Male = 'Male'
     Female = 'Female'
@@ -18,7 +19,9 @@ class UserProfile(models.Model):
     def __str__(self):
         return self.user.username
    
-
+### POST SIGNAL
+### It provide us to fill the fields which are in the UserProfile Model
+### And It can make this process at the same time with registering the new user
 def create_profile(sender,**kwargs):
     if kwargs['created']:
         profile = UserProfile.objects.create(
