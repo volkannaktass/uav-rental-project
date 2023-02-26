@@ -3,7 +3,7 @@
 
 ###  Development Setup
 
-- install Docker and Docker-compose under /opt/conda
+- install Docker and Docker-compose 
 
 Follow the instructions from the link below;
 	https://docs.docker.com/engine/install/
