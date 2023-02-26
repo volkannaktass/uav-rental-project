@@ -10,22 +10,22 @@
     <div class="col-lg-8">
       <form class="d-flex">
 	{% csrf_token %} 
-        <input class="form-control me-2" type="search" name = "keyword" placeholder="Search" aria-label="Search">
+        <input class="form-control me-2" type="search" name ="keyword" placeholder="Search with Title" aria-label="Search">
         <button class="btn btn-outline-success" type="submit">Search</button>
-      </form> 
+      </form>
       </div>
   </div>
 </div>
-
+{% if uav_filters %}
 <main>
     <section class="py-5 container">
         <div class="row py-lg-5">
-            <div class="col-lg-6 col-md-8 mx-auto">
+          <div class="col-lg-6 col-md-8 mx-auto">
               <form method="get">
 		{% csrf_token %} 
                     {{ uav_filters.form|crispy }}
                     <button class="btn btn-sm btn-danger" type="submit">Filter</button>
-                </form>
+              </form>
             </div>
         </div>
     </section>
@@ -33,11 +33,10 @@
         <div class="container">
             <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3
 			g-3">
-	      {% if uav_filters %}
                 {% for uav in uav_filters.qs %}
                 <div class="col">
-                    <div class="row">
-  <div class="col-md-10 offset-md-3">  
+                  <div class="row">
+		    <div class="col-md-10 offset-md-3">  
 
       <!-- Post Content Column -->
       <div class="col-lg-8">
@@ -80,6 +79,70 @@
     </div>
                 </div>
                 {% endfor %}
+	
+
+            </div>
+        </div>
+    </div>
+</main>
+	{% elif uav_search %}
+	<main>
+    <div class="album py-5 bg-light">
+        <div class="container">
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3
+			g-3">
+                {% for uav in uav_search %}
+                <div class="col">
+                  <div class="row">
+		    <div class="col-md-10 offset-md-3">  
+
+      <!-- Post Content Column -->
+      <div class="col-lg-8">
+
+        <!-- Title -->
+        <h2 class="mt-4">{{uav.title}}</h2>
+	
+        <!-- Author -->
+        <p class="lead">
+          
+         Published by {{uav.author.username}} 
+        </p>
+	<div class="col-md-3">
+	    <a href="{{uav.image.url}}"><img class="img-fluid
+		  rounded" src="{{uav.image.url}}" alt="" class="img-thumbnail"></a>
+	  </div>
+        <hr>
+	<h2 class="mt-4">{{uav.brand}}</h2>
+	<h2 class="mt-4">{{uav.model}}</h2>
+	<h2 class="mt-4">{{uav.weight}}</h2>
+	<h2 class="mt-4">{{uav.category}}</h2>
+	<h2 class="mt-4">{{uav.price}}</h2>
+
+        <!-- Date/Time -->
+        <p>{{uav.created_date}}</p>
+
+       
+        <hr>
+
+        <!-- Post Content -->
+        <p class="lead">
+            {{uav.content|safe|linebreaks}}
+        </p>
+        <hr>
+
+      </div>
+
+      
+      </div>
+    </div>
+                </div>
+                {% endfor %}
+	
+
+            </div>
+        </div>
+    </div>
+</main>
 		{% else %}
 		<div class="row">
   <div class="col-md-10 offset-md-3">        
@@ -91,8 +154,4 @@
   </div>
 </div>
 {% endif %}
-            </div>
-        </div>
-    </div>
-</main>
 {% endblock body %}

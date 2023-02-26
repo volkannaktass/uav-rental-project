@@ -49,7 +49,7 @@ def register(request):
         login(request,user)
         messages.info(request,"Registration Successful...")
 
-        return redirect("index")
+        return redirect("uav:uavs")
     context = {
             "form" : form,
             "profile_form" : profile_form,

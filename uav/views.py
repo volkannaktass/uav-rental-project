@@ -36,12 +36,13 @@ def showUav(request):
     keyword = request.GET.get("keyword")
 
     if keyword:
-        uav_posts = Uav.objects.filter(title__contains = keyword)
+        uav_search = Uav.objects.filter(title__contains = keyword)
         
-        return render(request,"show-uav.html",{"uav_posts":uav_posts})
-    uav_posts = Uav.objects.all()
-    uav_filters = UavFilter(request.GET, queryset=uav_posts)
-    return render(request,"show-uav.html",{"uav_filters":uav_filters})
+        return render(request,"show-uav.html",{"uav_search":uav_search})
+    else:
+        uav_posts = Uav.objects.all()
+        uav_filters = UavFilter(request.GET, queryset=uav_posts)
+        return render(request,"show-uav.html",{"uav_filters":uav_filters})
 
 
 @login_required(login_url = "user:login")
