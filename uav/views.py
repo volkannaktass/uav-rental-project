@@ -1,7 +1,7 @@
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
-
+from django.contrib.auth import get_user_model
 from django.shortcuts import (get_object_or_404, redirect, render, reverse)
 from user.models import UserProfile
 from .models import Uav
@@ -55,6 +55,8 @@ def showUav(request):
         uav_posts = Uav.objects.all()
         uav_filters = UavFilter(request.GET, queryset=uav_posts)
         return render(request,"show-uav.html",{"uav_filters":uav_filters})
+
+
 
 
 @login_required(login_url = "user:login")
